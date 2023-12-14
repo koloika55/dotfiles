@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find ~/pix/wallpapers -type f | shuf | nsxiv -
