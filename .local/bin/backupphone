@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rsync -uvrP /mnt/Calendar /mnt/Contacts /mnt/DCIM /mnt/Documents /mnt/Download /mnt/Pictures /mnt/SignalBackUp $HOME/phone

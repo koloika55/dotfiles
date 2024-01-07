@@ -1,5 +1,6 @@
 set nocompatible
 set clipboard+=unnamedplus
+set noshowmode 
 filetype plugin on
 syntax on
 set relativenumber

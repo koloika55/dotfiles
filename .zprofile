@@ -1,6 +1,7 @@
 export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
 unsetopt PROMPT_SP 2>/dev/null
 
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export EDITOR="nvim"
 export TERMINAL="st"
 export TERMINAL_PROG="st"
