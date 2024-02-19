@@ -3,8 +3,10 @@ alias lf='lfub'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias rm='rm -vI'
-alias ls="ls -hN --color=auto --group-directories-first"
+alias ls="ls -h --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias ccat="highlight --out-format=ansi"
 alias ip="ip -color=auto"
+alias wgetweb="wget -mpEk"
+alias signal-desktop="signal-desktop --ozone-platform=wayland --disable-gpu"
