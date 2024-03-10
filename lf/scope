@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# ueberzugpp
 image() {
     FILE_PATH="$1"
     X=$4
@@ -64,3 +63,4 @@ case "$(printf "%s\n" "$(readlink -f "$1")" | tr '[:upper:]' '[:lower:]')" in
         ;;
 esac
 exit 0
+

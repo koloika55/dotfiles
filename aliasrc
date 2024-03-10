@@ -9,4 +9,4 @@ alias diff="diff --color=auto"
 alias ccat="highlight --out-format=ansi"
 alias ip="ip -color=auto"
 alias wgetweb="wget -mpEk"
-alias signal-desktop="signal-desktop --ozone-platform=wayland --disable-gpu"
+
