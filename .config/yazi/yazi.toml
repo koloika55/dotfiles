@@ -7,10 +7,10 @@ ratio          = [ 1, 4, 3 ]
 sort_by        = "alphabetical"
 sort_sensitive = false
 sort_reverse   = false
-sort_dir_first = false
+sort_dir_first = true
 linemode       = "none"
-show_hidden    = false
-show_symlink   = true
+show_hidden    = true
+show_symlink   = false
 
 [preview]
 tab_size        = 2
@@ -80,6 +80,10 @@ bizarre_retry    = 5
 image_alloc      = 536870912  # 512MB
 image_bound      = [ 0, 0 ]
 suppress_preload = false
+
+[[plugin.prepend_previewers]]
+mime = "audio/*"
+exec = "exifaudio"
 
 [plugin]
 
@@ -186,6 +190,3 @@ open_offset = [ 0, 1, 50, 7 ]
 [log]
 enabled = false
 
-[[plugin.prepend_previewers]]
-mime = "audio/*"
-exec = "exifaudio"

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# variables
+output="$(date '+%y%m%d-%H%M-%S').png"
+
+case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)" | bemenu -l 6 -i -p "Screenshot which area?")" in
+	"a selected area") grim -l 0 -g "$(slurp)" ~/pix/pic-selected-"${output}" ;;
+	"current screen") grim -l 0 -o "$(wlrctl output list | awk '{print $1}' | bemenu -l 3)" ~/pix/pic-window-"${output}" ;;
+    "full screen") grim -l 0 ~/pix/pic-full-"${output}" ;;
+    "a selected area (copy)") grim -l 0 -g "$(slurp)" - | wl-copy ;;
+    "current screen (copy)") grim -l 0 -o "$(wlrctl output list | awk '{print $1}' | bemenu -l 3)" - | wl-copy ;;
+    "full screen (copy)") grim -l 0 - | wl-copy;;
+esac

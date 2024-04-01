@@ -6,12 +6,20 @@ set modelines=0
 set clipboard+=unnamedplus
 set noshowmode 
 filetype plugin on
-syntax on
 set relativenumber
 vnoremap <C-c> "+y
 map <C-p> "+P
 set nohlsearch
 set modelines=0
+set path+=**			" Searches current directory recursively.
+set wildmenu			" Display all matches when tab complete.
+set incsearch                   " Incremental search
+set hidden                      " Needed to keep multiple buffers open
+set nobackup                    " No auto backups
+set noswapfile                  " No swap
+set t_Co=256                    " Set if term supports 256 colors.
+syntax enable
+set mouse=nicr
 
 call plug#begin('~/.config/nvim/plugged')
 
