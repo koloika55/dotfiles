@@ -33,4 +33,4 @@ else
     lf "$@" 3>&-
 fi
 
-# doas pkill -x lf
+pkill -x lf

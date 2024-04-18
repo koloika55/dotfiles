@@ -38,11 +38,9 @@ fi
 
 xset r rate 300 50 &
 picom &
-slstatus &
+dwmblocks &
+redshift -l &
 setxkbmap -option caps:escape,shift:both_capslock &
 setbg &
-pipewire &
-pipewire-pulse &
-wireplumber &
 mpd &
 exec dwm

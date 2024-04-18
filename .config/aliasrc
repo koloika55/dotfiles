@@ -4,9 +4,10 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias rm='rm -vI'
 alias ls="ls -h --color=auto --group-directories-first"
+alias ll="ls -hla --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 alias ccat="highlight --out-format=ansi"
 alias ip="ip -color=auto"
 alias wgetweb="wget -mpEk"
-
+alias hl="helix"
