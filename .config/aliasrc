@@ -1,4 +1,5 @@
 alias vim='nvim'
+alias v='nvim'
 alias lf='lfub'
 alias cp='cp -iv'
 alias mv='mv -iv'
@@ -10,4 +11,7 @@ alias diff="diff --color=auto"
 alias ccat="highlight --out-format=ansi"
 alias ip="ip -color=auto"
 alias wgetweb="wget -mpEk"
-alias hl="helix"
+alias hx="helix"
+alias xi="xbps-install"
+alias xq="xbps-query"
+alias xr="xbps-remove"
