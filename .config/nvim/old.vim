@@ -19,17 +19,21 @@ set nobackup                    " No auto backups
 set noswapfile                  " No swap
 set t_Co=256                    " Set if term supports 256 colors.
 syntax enable
-set mouse=nicr
+set mouse=a
 
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'vimwiki/vimwiki'
-Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'morhetz/gruvbox'
 
 call plug#end()
+
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ }
 
 let g:vimwiki_list = [{'path': '~/dox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
