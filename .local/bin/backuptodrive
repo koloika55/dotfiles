@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rsync -auhvrP --info=progress2 --delete  --exclude 'dox/bkPhone' --exclude 'music' --exclude '.cache' $HOME /mnt | tee ~/.cache/backuplog
