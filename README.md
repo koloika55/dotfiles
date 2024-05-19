@@ -1,1 +1,1 @@
-My dotfiles. Some of them are copied from other people and edited for myself.
+My configuration files and scripts. Deployed with my arch install script.
