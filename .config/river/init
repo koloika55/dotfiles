@@ -1,34 +1,22 @@
 #!/bin/sh
 
-# This is the example configuration file for river.
-#
-# If you wish to edit this, you will probably want to copy it to
-# $XDG_CONFIG_HOME/river/init or $HOME/.config/river/init first.
-#
 # See the river(1), riverctl(1), and rivertile(1) man pages for complete
 # documentation.
 
-# Note: the "Super" modifier is also known as Logo, GUI, Windows, Mod4, etc.
-
-# Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
 riverctl map normal Super Return spawn foot
 riverctl map normal Super W spawn librewolf
-riverctl map normal Super S spawn 'grim -g "$(slurp)" ~/Images/Shots/$(date +"%s_grim.png")'
+riverctl map normal Super F2 spawn 'signal-desktop'
+riverctl map normal Super F3 spawn 'keepassxc'
 riverctl map normal Super M spawn 'foot -e ncmpcpp'
-riverctl map normal Super+Shift M spawn 'foot -e pulsemixer'
-riverctl map normal Super R spawn 'foot -e lfub'
+riverctl map normal Super+Shift M spawn 'foot -e alsamixer'
+riverctl map normal Super R spawn 'foot -e yazi'
 riverctl map normal Super+Shift R spawn 'foot -e btop'
 riverctl map normal Super N spawn 'foot -e nvim -c VimwikiIndex'
-riverctl map normal Super T spawn 'foot -e stig'
+# riverctl map normal Super T spawn 'foot -e stig'
 riverctl map normal Super+Shift N spawn 'foot -e newsboat'
 riverctl map normal Super P spawn 'waylock'
-riverctl map normal Super Insert spawn 'wlrctl keyboard type $(grep -v "^#" ~/.local/bin/bookmarks | bemenu -i -l 50 | cut -d" " -f1)'
+riverctl map normal Super Insert spawn 'wlrctl keyboard type $(grep -v "^#" ~/.config/bookmarks | bemenu -i -l 50 | cut -d" " -f1)'
 riverctl map normal Super Print spawn 'grimpick'
-
-# Option to use tofi like dmenu or rofi.
-#riverctl map normal Super P spawn tofi-drun
-
-# Option to use wofi like dmenu or rofi.
 riverctl map normal Super D spawn 'bemenu-run'
 
 # Super+Q to close the focused view
@@ -147,19 +135,15 @@ riverctl map passthrough Super F11 enter-mode normal
 # not have a modifier
 for mode in normal locked
 do
-    # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 5'
-    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 5'
-    riverctl map $mode None XF86AudioMute         spawn 'pamixer --toggle-mute'
-
-    # Control screen backlight brightness with light (https://github.com/haikarainen/light)
-    riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
-    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'amixer -q set Master 5%+ unmute'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'amixer -q set Master 5%- unmute'
+    riverctl map $mode None XF86AudioMute         spawn 'amixer -q set Master toggle'
+    riverctl map $mode None XF86MonBrightnessUp   spawn 'brillo -qA 5'
+    riverctl map $mode None XF86MonBrightnessDown spawn 'brillo -qU 5'
 done
 
 # Set the resolution
-#riverctl spawn "wlr-randr --output Virtual-1 --mode 1920x1080"
-riverctl spawn "wlr-randr --output LVDS1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output VGA-1 --mode 1920x1080 --pos 0x768 --rotate normal"
+riverctl spawn "wlr-randr --output LVDS-1 --mode 1366x768 --pos 0,1080 --output VGA-1 --preferred --mode 1920x1080 --pos 0,0"
 riverctl spawn "wbg ~/.config/wall.png"
 
 # Set background and border color
@@ -182,7 +166,7 @@ riverctl csd-filter-add app-id "gedit"
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
-rivertile -view-padding 5 -outer-padding 5 -main-ratio 0.5 &
+rivertile -view-padding 3 -outer-padding 3 -main-ratio 0.5 &
 riverctl focus-follows-cursor always
 riverctl set-cursor-warp on-focus-change
 
@@ -194,5 +178,5 @@ riverctl hide-cursor when-typing enabled
 riverctl rule-add csd -app-id "bar"
 riverctl spawn "foot --server"
 riverctl spawn "~/.config/yambar/scripts/yambar-start.sh"
-pipewire & pipewire-pulse & wireplumber&
-mpd& 
+riverctl spawn "wlsunset -l 56.9 -L 24.1"
+mpd & 
