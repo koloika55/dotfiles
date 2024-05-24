@@ -1,4 +1,4 @@
-nerdfont: &nerdfont Symbols Nerd Font Mono:pixelsize=12 
+nerdfont: &nerdfont Symbols Nerd Font Mono:pixelsize=16 
 gomono: &gomono GoMono Nerd Font Mono:pixelsize=18
 bg_default: &bg_default {stack: [{background: {color: 00000000}}, {underline: {size: 3, color: 98971aff}}]}
 
@@ -82,71 +82,51 @@ bar:
                 text: "{time}"
 
   right: 
-
-    # - mpd:
-    #   host: 127.0.0.1:6600
-    #          content:
-    #              string:
-    #                text: "{artist} - {album} - {title} ({end})"
-
-    - pipewire:
-        anchors:
-          volume: &volume
-            conditions:
-              muted:
-                string:
-                  text: "0%"
-                  on-click:
-                    middle: sh -c "amixer set Master 1+ toggle"
-              ~muted:
-                string:
-                  text: "{cubic_volume}%"
-                  on-click:
-                    left: sh -c "amixer sset Master 2%-"
-                    middle: sh -c "amixer set Master 1+ toggle"
-                    right: sh -c "amixer sset Master 2%+"
-        content:
-          list:
-            items:
-              - map:
-                  conditions:
-                    type == "sink":
-                      map:
-                        conditions:
-                          icon == "audio-headset-bluetooth":
-                            string: {text: "󰋋", font: *nerdfont}
-                          muted: {string: {text: "󰝟", font: *nerdfont}}
-                        default:
-                          - ramp:
-                              tag: cubic_volume
-                              items:
-                                - string: {text: "󰕿", font: *nerdfont}
-                                - string: {text: "󰖀", font: *nerdfont}
-                                - string: {text: "󰕾", font: *nerdfont}
-                    type == "source":
-                      - string: {text: "", font: *nerdfont, left-margin: 5}
-              - map:
-                  <<: *volume
-    - backlight:
-        name: acpi_video0
-        content: [ string: {text: , font: *nerdfont}, string: {text: "{percent}%", on-click: { left: sh -c "light -U 5", right: sh -c "light -A 5"}}]
     - network:
-        name: wlan0
-        poll-interval: 5000
+        poll-interval: 1000
         content:
           map:
-            default: {string: {text: , font: *nerdfont, foreground: ffffff66}}
+            default: {empty: {}}
             conditions:
-              state == down: {string: {text: , font: *nerdfont, foreground: ffffffff}}
-              state == up:
+              name == wlan0:
                 map:
-                  default:
-                    - string: {text: " {ssid}", font: *nerdfont, }
-
-
+                  default: {string: {text: , font: *nerdfont, foreground: ffffff66}}
                   conditions:
-                    ipv4 == "":
-                      - string: {text: " {ssid}", font: *nerdfont, foreground: ffffff66}
+                    state == down: {string: {text: , font: *nerdfont, foreground: ff0000ff}}
+                    state == up:
+                      map:
+                        default:
+                          - string: {text: , font: *nerdfont}
+
+                        conditions:
+                          ipv4 == "":
+                            - string: {text: , font: *nerdfont, foreground: ffffff66}
+    - alsa:
+        card: hw:PCH
+        mixer: Master
+        content:
+          map:
+            conditions:
+              ~online: {string: {text: , font: *nerdfont, foreground: ff0000ff}}
+              online:
+                map:
+                  on-click: /bin/sh -c "amixer -q sset Speaker unmute && amixer -q sset Headphone unmute && amixer -q sset Master toggle"
+                  conditions:
+                    muted: {string: {text: , font: *nerdfont, foreground: ffffff66}}
+                    ~muted:
+                      ramp:
+                        tag: percent
+                        items:
+                        - string: {text: "  ", font: *nerdfont}
+                        - string: {text: "  ", font: *nerdfont}
+                        - string: {text: "  ", font: *nerdfont}
+                        - string: {text: "  ", font: *nerdfont}
+                        - string: {text: "  ", font: *nerdfont}
+
+    - backlight:
+        name: intel_backlight
+        content: [ string: {text: , font: *nerdfont}, string: {text: "{percent}%"}]
+
     - battery:
         name: BAT0
         poll-interval: 10000
@@ -196,4 +176,3 @@ bar:
                       - string: {text:  , foreground: ffffffff, font: *nerdfont}
                       - string: {text:  , foreground: ffffffff, font: *nerdfont}
                 - string: {text: "{capacity}%"}
-
