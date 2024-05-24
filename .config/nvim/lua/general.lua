@@ -5,6 +5,10 @@ local opt = vim.opt
 -- cmd('syntax on')
 -- vim.api.nvim_command('filetype plugin indent on')
 
+-- Map <leader> to space
+g.mapleader = " "
+g.maplocalleader = " "
+
 o.termguicolors = true
 o.background = 'dark'
 
@@ -52,17 +56,13 @@ opt.mouse = "a"
 o.encoding = "utf-8"
 o.fileencoding = "utf-8"
 o.compatible = false
-o.modelines = "0"
 o.showmode = false
 o.hlsearch = false
 o.wildmenu = true
 o.incsearch = true
 o.hidden = true
-o.syntax = true
+o.syntax = enable
 
--- Map <leader> to space
-g.mapleader = " "
-g.maplocalleader = " "
 
 vim.g.vimwiki_list = {{
 	path = '~/dox/vimwiki',
